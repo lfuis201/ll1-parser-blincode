@@ -1,4 +1,4 @@
 int main ( ) { 
 	
-	string hola;
+	int hola;
 }

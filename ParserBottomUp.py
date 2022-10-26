@@ -7,9 +7,6 @@ class node:
   def __init__(self, data, id, parent,value): 
     self.data = data #nombre del nodo (DEFINE, FUNC)
     self.id = id
-    #self.valor = l_tok[0][1]
-    #self.valor = l_tok.value
-    #self.linea = l_tok.line
     self.parent = parent
     self.childs = []
     self.value = value
@@ -142,7 +139,7 @@ for row in range (1,sheet.nrows):
 
 # lista de los tokens que imoortamos de nuestra gramatica
 A=l_tok + [['$','$']]
-
+AC= []
 #imprimir la lista
 print(A)
 
@@ -171,9 +168,7 @@ flag=True
 aux = ["E","$"]
 
 # creamos la variable para generar nuestro grafico con extension .dot
-f = open ("parserwaa.dot","+w")
 
-f.write("digraph {\n")
 
 # inicializamos la raiz con 0 y E(primer simbolo)
 root = node("E", gbl_counter_id, None, None)
@@ -233,10 +228,12 @@ while(aux or A):
       print_tree(root)
       print_stack_nodes(stack_nodes)
       print("fin:----------------------------------------------")
-
       pri = aux.pop(0)
       aux = L[getNum(pri)][getNum(A[0][0])] + aux
       print("->",pri,"-",A[0][0],":",L[getNum(pri)][getNum(A[0][0])], "stack:", aux, "\n\n\n")
+      
+      print("papapapsad")
+      AC = A.copy()
       print(aux,"___",A,"\n")
 
       
@@ -262,8 +259,12 @@ else:
 # procesamos el .dot
 print("creando .dot")
 
+f = open ("parserwaa.dot","+w")
+
+f.write("digraph {\n")
 # pasamos los nodos al archivo .dot
 get_dot(root,f)
 f.write("}") 
 f.close()
 
+print("\n")
